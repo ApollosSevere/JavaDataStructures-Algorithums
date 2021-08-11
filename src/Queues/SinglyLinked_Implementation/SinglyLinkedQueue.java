@@ -1,11 +1,11 @@
-package Queues.Linked_Implementation;
+package Queues.SinglyLinked_Implementation;
 
 import LinkedList.Singly.LinkedListTemplate;
 import Queues.Queue;
 
-public class LinkedQueue<E> implements Queue<E> {
+public class SinglyLinkedQueue<E> implements Queue<E> {
     private final LinkedListTemplate<E> list = new LinkedListTemplate<E>();
-    public LinkedQueue() {};
+    public SinglyLinkedQueue() {};
     public int size() {return list.getSize();}
     public boolean isEmpty() {
        return list.isEmpty();
