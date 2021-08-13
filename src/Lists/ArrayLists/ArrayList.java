@@ -2,7 +2,7 @@ package Lists.ArrayLists;
 
 import javax.xml.crypto.Data;
 
-import Lists.List;
+import Lists.ArrayLists.Interfaces.List;
 
 public class ArrayList<E> implements List<E> {
     

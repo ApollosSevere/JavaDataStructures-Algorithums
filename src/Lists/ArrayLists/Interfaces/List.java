@@ -1,4 +1,4 @@
-package Lists;
+package Lists.ArrayLists.Interfaces;
 
 /* A simplified version of the java.util.List interface */ 
 public interface List<E> {
