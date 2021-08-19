@@ -1,5 +1,8 @@
 package Lists.ArrayLists;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import javax.xml.crypto.Data;
 
 import Lists.ArrayLists.Interfaces.List;
@@ -80,5 +83,40 @@ public class ArrayList<E> implements List<E> {
             newData[i] = data[i];       //Notice how there is no .append or .push method? 
         }
         data = newData;
+    }
+
+
+
+    /* ----------------- Implementing Nested ArrayIterator Class ----------------- */ 
+
+    /* It is important to note that each instance containes an implicit reference to the containing list,
+       allowing it to access the list's members!! --> This is dope (Fullstack Academy) */
+    private class ArrayIterator implements Iterator<E> {
+        private int j = 0;                   // Index of the next element to report
+        private boolean removable = false;   // can remove be called at this time?
+
+        public boolean hasNext() { return j <  size; }     // size is a field of the outer instance!
+
+        public E next() throws NoSuchElementException {
+            if (j == size) throw new NoSuchElementException("No next element");
+            removable = true;    // This element can subsequently be removed
+            E result =  data[j];
+            j++;
+            return result;   // This returns data[j] + increments it at the same time!
+        }
+
+        // Removes the element returned by most recent call to next!
+        /* Important: it throws illegalStateException if next has not yet been called + 
+           if remove was already called since recent next */
+        public void remove() throws IllegalStateException {
+            if (!removable) throw new IllegalStateException("Nothing to remove!");
+            ArrayList.this.remove(j - 1);
+            j--;
+            removable = false;      // do not allow remove again until next is called!!
+        }
+    }
+
+    public Iterator<E> iterator() {
+        return new ArrayIterator();
     }
 }
