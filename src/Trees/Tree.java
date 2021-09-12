@@ -8,10 +8,10 @@ import Lists.PositionalList.Interfaces.Position;
 
 /* Come on man! We have to understand whats going on here throughly!! */ 
 
-public interface Tree<E> {
+public interface Tree<E> extends Iterable<E> {
     Position<E> root(); 
     Position<E> parent(Position<E> p) throws IllegalArgumentException;
-    Iterable<Position<E>> children(Position<E> P) throws IllegalArgumentException;
+    Iterable<Position<E>> children(Position<E> p) throws IllegalArgumentException;
 
     int numChildren(Position<E> p) throws IllegalArgumentException;
     boolean isInternal(Position<E> p) throws IllegalArgumentException;
@@ -20,22 +20,7 @@ public interface Tree<E> {
 
     int size();
     boolean isEmpty();
-    // Iterator<E> iterator();
-    // Iterable<Position<E>> positions();
+    Iterator<E> iterator();
+    Iterable<Position<E>> positions();
 }
 
-// public interface Tree<E> extends Iterable<E> {
-//     Position<E> root(); 
-//     Position<E> parent(Position<E> p) throws IllegalArgumentException;
-//     Iterable<Position<E>> children(Position<E> P) throws IllegalArgumentException;
-
-//     int numChildren(Position<E> p) throws IllegalArgumentException;
-//     boolean isInternal(Position<E> p) throws IllegalArgumentException;
-//     boolean isExternal(Position<E> p) throws IllegalArgumentException;
-//     boolean isRoot(Position<E> p) throws IllegalArgumentException;
-
-//     int size();
-//     boolean isEmpty();
-//     Iterator<E> iterator();
-//     Iterable<Position<E>> positions();
-// }

@@ -6,9 +6,9 @@ import Trees.AbstractTree;
 import java.util.List;
 
 public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements BinaryTree<E> {
+    
     public Position<E> sibling(Position<E> p) {
-        // Returns the Position of p's sibling (Remember, we are working with a binary
-        // tree here!!)
+        // Dope way of grabbing Right or left Sibling
         Position<E> parent = parent(p);
         if (parent == null)
             return null;
@@ -17,9 +17,7 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements B
         else
             return left(parent);
     }
-
-    // Returns the number of children of Position p (Remember the count can only be
-    // at most 2, becasue this is a binary search tree!)
+    
     public int numChildren(Position<E> p) {
         int count = 0;
         if (left(p) != null)
@@ -37,4 +35,30 @@ public abstract class AbstractBinaryTree<E> extends AbstractTree<E> implements B
             snapshot.add(right(p));
         return snapshot;
     }
+
+    
+    /* ------- Defualt Traversal Algorithum Speicific to Binary Tree -------- */
+
+    // Meats of the Operations
+    private void inorderSubtree(Position<E> p, List<Position<E>> snapshot) {
+        if (left(p) != null)
+            inorderSubtree(left(p), snapshot);
+        snapshot.add(p);
+        if (right(p) != null)
+            inorderSubtree(right(p), snapshot);
+    }
+    // The caller Function
+    public Iterable<Position<E>> inorder() {
+        List<Position<E>> snapshot = new ArrayList<>();
+        if (!isEmpty())
+            inorderSubtree(root(), snapshot);
+        return snapshot;
+    }
+
+    /* ------- Send off your Defalut Way of Traveresing -------- */
+    // Overrides positions to make inorder the default order for binary trees!!
+    public Iterable<Position<E>> positions() {
+        return inorder();
+    }
+
 }
