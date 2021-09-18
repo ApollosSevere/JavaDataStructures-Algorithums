@@ -46,4 +46,6 @@ public interface PositionalList<E> {
 
     // Removes the element stored at Position p and returns it (invaldating p!)
     E remove(Position<E> p) throws IllegalArgumentException;
+
+    
 }
