@@ -19,6 +19,30 @@ public class HeapPriorityQueue<K,V> extends AbstractPriorityQueue<K,V>{
     public HeapPriorityQueue() {super();}
     public HeapPriorityQueue(Comparator<K> comp) {super(comp);}
 
+    public HeapPriorityQueue(K[] keys, V[] values) {
+        super();
+
+        for (int j = 0; j < Math.min(keys.length, values.length); j++) {
+            heap.add(new PQEntry<>(keys[j], values[j]));
+        }
+        heapify();
+    }
+    public HeapPriorityQueue(K[] keys, V[] values, Comparator<K> comp) {
+        super(comp);
+        for (int j = 0; j < Math.min(keys.length, values.length); j++) {
+            heap.add(new PQEntry<>(keys[j], values[j]));
+        }
+        heapify();
+    }
+    
+
+    /* ------------ Important Protected Utilities ------------- */
+    protected void heapify() {
+        int startIndex = parent(size() - 1);
+        for (int j = startIndex; j >= 0; j--)
+            downheap(j);
+    }    //Yoooo --> Did we just make a sorting algorithum with just one function?
+
 
     /* ------------ Protected Utilities ------------- */
     protected int parent(int j) {return (j-1) / 2;}
